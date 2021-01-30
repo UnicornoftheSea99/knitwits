@@ -1,20 +1,30 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 
 class App extends Component {
-
   render(){ 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1> KnitWits </h1>
-        <img src={'./IMG_0069.png'} />
-      </header>
-      <div>
-        <Counter />
-      </div>
+       <header className="App-header">
+         <h1> KnitWits </h1>
+         <img src={'./IMG_0069.png'} />
+       </header>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <h1> Welcome </h1>
+        </Grid>
+        <Grid item xs={6}>
+          <Counter />
+        </Grid>
+        <Grid item xs={6}>
+         <TodoApp />
+        </Grid>
+      </Grid>
     </div>
   );
 }
@@ -22,10 +32,7 @@ class App extends Component {
 
 
 class Counter extends Component {
-  // state = {
-  //   count: 0,
-  //   left: 10
-  // };
+ 
   constructor(props) {
     super(props);
     this.state = { count: 0, left:''};
@@ -60,13 +67,15 @@ class Counter extends Component {
      border: "none",
       color: "black",
       padding: "15px 32px",
+      margin: "15px",
 
     };
+   
     return (
     <div>
        <form id="findnumrows" onSubmit={this.handleSubmit}>
           <label htmlFor="new-todo">
-            What needs to be done?
+            Number of Rows?
           </label>
           <input
             id="numRowinput"
@@ -84,7 +93,68 @@ class Counter extends Component {
   }
 }
 
+class TodoApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { items: [], text: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
+  render() {
+    return (
+      <div>
+        <h3>Steps to Do</h3>
+        <TodoList items={this.state.items} />
+        <form onSubmit={this.handleSubmit}>
+          
+          <label htmlFor="new-todo">
+            What needs to be done?
+          </label>
+          <input
+            id="new-todo"
+            onChange={this.handleChange}
+            value={this.state.text}
+          />
+          <button>
+            Add #{this.state.items.length + 1}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.text.length === 0) {
+      return;
+    }
+    const newItem = {
+      text: this.state.text,
+      id: Date.now()
+    };
+    this.setState(state => ({
+      items: state.items.concat(newItem),
+      text: ''
+    }));
+  }
+}
+
+class TodoList extends Component {
+  render() {
+    return (
+      <ul>
+        {this.props.items.map(item => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
+    );
+  }
+}
 
 
 export default App;
