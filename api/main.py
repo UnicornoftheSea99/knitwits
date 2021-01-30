@@ -2,19 +2,19 @@ from flask import Flask
 import csv
 import json
 from flask import jsonify
-import pyrebase
+from pyrebase import pyrebase
 from flask import request
-
+from hidden import *
 app = Flask(__name__, static_url_path='')
 
 config = {
-    "apiKey": "AIzaSyARn9HJzYzxkCjo6fcpGFbqjxbtbXehSK0",
-    "authDomain": "knitwit-fc18c.firebaseapp.com",
-    "databaseURL": "https://knitwit-fc18c-default-rtdb.firebaseio.com",
-    "projectId": "knitwit-fc18c",
-    "storageBucket": "knitwit-fc18c.appspot.com",
-    "messagingSenderId": "19386219340",
-    "appId": "1:19386219340:web:384f3cd772423b5bde2de9"
+    "apiKey": apiKey,
+    "authDomain": authDomain,
+    "databaseURL": databaseURL,
+    "projectId": "knitwits-69eff",
+    "storageBucket": "knitwits-69eff.appspot.com",
+    "messagingSenderId": messagingSenderId,
+    "appId": "1:1093837080388:web:281705266de3afe0df3911"
   }
 
 firebase = pyrebase.initialize_app(config)
