@@ -1,22 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
-import { render } from '@testing-library/react';
 
-/* hell yeah. canyou see me typing here */
 
 class App extends Component {
-  render(){
+
+  render(){ 
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
+      <header className="App-header">
         <h1> KnitWits </h1>
-        {/* <h2> dropdown for part, i am lazy and dont know the tags</h2>        */}
-      {/* </header> */}
+        <img src={'./IMG_0069.png'} />
+      </header>
       <div>
         <Counter />
       </div>
-      {/* <p> under the thingy goes optional stitch instructions whee </p> */}
     </div>
   );
 }
@@ -24,10 +22,16 @@ class App extends Component {
 
 
 class Counter extends Component {
-  state = {
-    count: 0,
-    left: 10
-  };
+  // state = {
+  //   count: 0,
+  //   left: 10
+  // };
+  constructor(props) {
+    super(props);
+    this.state = { count: 0, left:''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   addClick = () => {
     this.setState(({ count,left }) => ({
       count: count + 1,
@@ -40,16 +44,41 @@ class Counter extends Component {
       left: left +1
     }));
   };
+
+  handleChange(e) {
+    this.setState({ left: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById("findnumrows").style.display="none";
+  }
+
   render() {
     const mystyle = {
      display: "inline-block",
+     border: "none",
+      color: "black",
+      padding: "15px 32px",
+
     };
     return (
-    <div style={mystyle}>
-      <button onClick={this.addClick}>+1</button>
+    <div>
+       <form id="findnumrows" onSubmit={this.handleSubmit}>
+          <label htmlFor="new-todo">
+            What needs to be done?
+          </label>
+          <input
+            id="numRowinput"
+            onChange={this.handleChange}
+            value={this.state.left}
+          />
+          <button type="submit">Set Number of Rows </button>
+        </form>
+      <button style={mystyle} onClick={this.addClick}>+1</button>
+      <button style={mystyle} onClick={this.minusClick}>-1</button>
       <p>Rows Completed: {this.state.count}</p>
       <p>Rows Left: {this.state.left}</p>
-      <button onClick={this.minusClick}>-1</button>
     </div>
     )
   }
