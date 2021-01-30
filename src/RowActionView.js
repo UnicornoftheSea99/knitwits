@@ -6,15 +6,6 @@ import Grid from '@material-ui/core/Grid';
 
 const MyContext = React.createContext();
 
-/*async grabPattern = query => {
-    let response = await fetch(query, {method: 'GET', redirect: 'follow'});
-    if (response.ok) { // if HTTP-status is 200-299
-    // get the response body (the method explained below)
-    let json = await response.json();
-  } else {
-    alert("HTTP-Error: " + response.status);
-  }};*/
-
 class RowActionView extends Component {
     // static contextType = SmallContext;
     componentDidMount (){
