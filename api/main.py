@@ -34,6 +34,7 @@ def getHash(hashVal):
         return jsonify(jsonPage)
     except Exception as ex:
         print(ex)
+        return jsonify({"error":"does not exist"})
 
 @app.route('/api/post/', methods = ['POST'])
 def helloText():
