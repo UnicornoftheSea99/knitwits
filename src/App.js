@@ -19,14 +19,17 @@ class App extends Component {
 
   decideScarf(){
     this.setState({patternPicked: true, chosenPattern: 'scarf'});
+    console.log("scarf!");
   }
 
   decideBee(){
     this.setState({patternPicked: true, chosenPattern: 'bee'});
+    console.log("bee!");
   }
 
   decidePlushie(){
     this.setState({patternPicked: true, chosenPattern: 'plushie'});
+    console.log("plushie!");
   }
 
   render(){
