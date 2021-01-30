@@ -5,7 +5,9 @@ from flask import jsonify
 from pyrebase import pyrebase
 from flask import request
 from hidden import *
+from flask_cors import CORS
 app = Flask(__name__, static_url_path='')
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 config = {
     "apiKey": apiKey,
@@ -19,6 +21,10 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
+
+@app.route("/")
+def hello():
+    return jsonify({"Hello!":"World"})
 
 @app.route("/api/get/<hashVal>")
 def getHash(hashVal):
