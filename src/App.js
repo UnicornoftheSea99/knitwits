@@ -1,26 +1,28 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import PatternSelectScreen from './PatternSelectScreen.jsx'
+import RowActionView from './RowActionView.js'
+import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
-/* hell yeah. canyou see me typing here */
 
-function App() {
+class App extends Component {
+  render(){
+    // to be coded next:
+    // if context contains button click record, generate RowActionView
+    // else PatternSelectScreen 
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
       <header className="App-header">
-        <PatternSelectScreen/>
-        <h1> Thneed Title Placeholder </h1>
-        <h2> dropdown for part, i am lazy and dont know the tags</h2>       
-      </header>
-      <div>
-        <p>delete this p, but these thing should be left to right in here</p>
-        <p> - button replaces this </p>
-        <p> how many rows left to knit? number go here </p>
-        <p> + button replaces this </p>
-      </div>
-      <p> under the thingy goes optional stitch instructions whee </p>
+         <h1> KnitWits </h1>
+         <img src={'./IMG_0069.png'} />
+       </header>
+       <PatternSelectScreen/>
+      <RowActionView/>
     </div>
   );
+}
 }
 
 export default App;

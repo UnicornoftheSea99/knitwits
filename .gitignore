@@ -24,4 +24,4 @@ yarn-error.log*
 
 virtualenv
 hidden.py
-main.py
+api/app.yaml
