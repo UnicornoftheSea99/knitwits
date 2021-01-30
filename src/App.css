@@ -3,12 +3,19 @@
 }
 
 .App-header {
-  background-color: #28Ac94;
+  /* background-color: #28Ac94; */
+  background-color: #f8dae2;
   /* min-height: 100vh; */
   display: flex;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: wheat;
+  /* color: wheat; */
+  color:whitesmoke;
+  /* font-family: 'Codystar', cursive; */
+  font-family: 'Slackey', cursive;
+  /* font-family: 'Rubik Mono One', sans-serif; */
+
+
 }
 
 img{
