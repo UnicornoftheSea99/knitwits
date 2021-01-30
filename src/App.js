@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import PatternSelectScreen from './PatternSelectScreen.jsx'
 
 /* hell yeah. canyou see me typing here */
 
@@ -7,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <PatternSelectScreen/>
         <h1> Thneed Title Placeholder </h1>
         <h2> dropdown for part, i am lazy and dont know the tags</h2>       
       </header>
