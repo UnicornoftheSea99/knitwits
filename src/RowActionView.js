@@ -1,9 +1,56 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { createContext, Component } from 'react';
+import { SmallContext } from './small-context.js'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+const MyContext = React.createContext();
+
+/*async grabPattern = query => {
+    let response = await fetch(query, {method: 'GET', redirect: 'follow'});
+    if (response.ok) { // if HTTP-status is 200-299
+    // get the response body (the method explained below)
+    let json = await response.json();
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }};*/
+
 class RowActionView extends Component {
+    // static contextType = SmallContext;
+    constructor(props) {
+        super(props);
+        var query = '';
+        switch(MyContext.chosenPattern){
+            case 'scarf':
+            query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
+            break;
+        case 'bee':
+            query = 'https://knitwits.ue.r.appspot.com/api/get/8031677599879346587'
+            break;
+        case 'plushie':
+            query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
+            break;
+        }
+        
+        /*var xhr = new XMLHttpRequest();
+        var json_obj, status = false;
+        xhr.open("GET", query, true);
+        xhr.onload = function (e) {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                console.log(xhr.response);
+                var json_obj = JSON.parse(xhr.responseText);
+                status = true;
+              } else {
+                console.error(xhr.statusText);
+              }
+            }
+          }.bind(this);
+          xhr.onerror = function (e) {
+            console.error(xhr.statusText);
+          };
+          xhr.send(null);*/
+      }
     render(){
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
