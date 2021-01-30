@@ -4,7 +4,6 @@ import { SmallContext } from './small-context.js'
 export default function PatternSelectScreen(){
     const myContext=useContext(SmallContext);
     // okay cool what do i do with my context now
-
     return(<div style={{margin:"10px"}}>
         <button onClick={myContext.decideScarf} style={{margin:"10px"}}>Knit Scarf</button>
         <button onClick={myContext.decideBee}style={{margin:"10px"}}>Crochet Bee</button>

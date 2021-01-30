@@ -15,12 +15,9 @@ class RowActionView extends Component {
           query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
           break;
       case 'bee':
-          query = 'https://knitwits.ue.r.appspot.com/api/get/8031677599879346587'
+          query = 'https://knitwits.ue.r.appspot.com/api/get/-7378964869400283023'
           break;
       case 'plushie':
-          query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
-          break;
-      default:
           query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
           break;
       }
