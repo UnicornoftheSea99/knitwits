@@ -44,3 +44,12 @@ def helloText():
     pattern = request.form.get("pattern")
     x = db.child(hash(pattern)).set(pattern)
     return jsonify({"hashVal":hash(pattern)})
+
+@app.route('/api/pdf/<hashVal>', methods=["GET"])
+def getPDF():
+    try:
+        jsonPage = db.order_by_key().equal_to("-"+hashVal).get().val()
+        return jsonify(jsonPage)
+    except Exception as ex:
+        print("error", ex)
+        return jsonify({"error":"does not exist"})

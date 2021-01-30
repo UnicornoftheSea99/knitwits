@@ -19,14 +19,17 @@ class App extends Component {
 
   decideScarf(){
     this.setState({patternPicked: true, chosenPattern: 'scarf'});
+    console.log("scarf!");
   }
 
   decideBee(){
     this.setState({patternPicked: true, chosenPattern: 'bee'});
+    console.log("bee!");
   }
 
   decidePlushie(){
     this.setState({patternPicked: true, chosenPattern: 'plushie'});
+    console.log("plushie!");
   }
 
   render(){
@@ -36,7 +39,8 @@ class App extends Component {
     if (picked) {view = (<RowActionView/>);}
 
     return (
-      <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
+      // <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
+      <div className="App" style={{backgroundColor:"whitesmoke", color:"#404022"}}>
         <header className="App-header">
          <h1> KnitWits </h1>
          <img src={'./IMG_0069.png'} />
