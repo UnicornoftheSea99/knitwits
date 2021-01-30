@@ -6,51 +6,49 @@ import Grid from '@material-ui/core/Grid';
 
 const MyContext = React.createContext();
 
-/*async grabPattern = query => {
-    let response = await fetch(query, {method: 'GET', redirect: 'follow'});
-    if (response.ok) { // if HTTP-status is 200-299
-    // get the response body (the method explained below)
-    let json = await response.json();
-  } else {
-    alert("HTTP-Error: " + response.status);
-  }};*/
-
 class RowActionView extends Component {
     // static contextType = SmallContext;
+    componentDidMount (){
+      var query = '';
+      switch(MyContext.chosenPattern){
+          case 'scarf':
+          query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
+          break;
+      case 'bee':
+          query = 'https://knitwits.ue.r.appspot.com/api/get/8031677599879346587'
+          break;
+      case 'plushie':
+          query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
+          break;
+      default:
+          query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
+          break;
+      }
+
+      var xhr = new XMLHttpRequest();
+      var json_obj, status = false;
+      xhr.open("GET", query, true);
+      xhr.onload = function (e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              console.log(xhr.response);
+              var json_obj = JSON.parse(xhr.responseText);
+              status = true;
+            } else {
+              console.error(xhr.statusText);
+            }
+          }
+        }.bind(this);
+        xhr.onerror = function (e) {
+          console.error(xhr.statusText);
+        };
+        xhr.send(null);
+
+    }
     constructor(props) {
         super(props);
-        var query = '';
-        switch(MyContext.chosenPattern){
-            case 'scarf':
-            query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
-            break;
-        case 'bee':
-            query = 'https://knitwits.ue.r.appspot.com/api/get/8031677599879346587'
-            break;
-        case 'plushie':
-            query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
-            break;
-        }
-        
-        /*var xhr = new XMLHttpRequest();
-        var json_obj, status = false;
-        xhr.open("GET", query, true);
-        xhr.onload = function (e) {
-            if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                console.log(xhr.response);
-                var json_obj = JSON.parse(xhr.responseText);
-                status = true;
-              } else {
-                console.error(xhr.statusText);
-              }
-            }
-          }.bind(this);
-          xhr.onerror = function (e) {
-            console.error(xhr.statusText);
-          };
-          xhr.send(null);*/
       }
+
     render(){
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
@@ -67,7 +65,7 @@ class RowActionView extends Component {
 }
 
 class Counter extends Component {
- 
+
     constructor(props) {
       super(props);
       this.state = { count: 0, left:''};
@@ -86,16 +84,16 @@ class Counter extends Component {
         left: left +1
       }));
     };
-  
+
     handleChange(e) {
       this.setState({ left: e.target.value });
     }
-  
+
     handleSubmit(e) {
       e.preventDefault();
       document.getElementById("findnumrows").style.display="none";
     }
-  
+
     render() {
       const mystyle = {
        display: "inline-block",
@@ -103,9 +101,9 @@ class Counter extends Component {
         color: "black",
         padding: "15px 32px",
         margin: "15px",
-  
+
       };
-     
+
       return (
       <div>
          <form id="findnumrows" onSubmit={this.handleSubmit}>
@@ -127,7 +125,7 @@ class Counter extends Component {
       )
     }
   }
-  
+
   class TodoApp extends Component {
     constructor(props) {
       super(props);
@@ -135,14 +133,14 @@ class Counter extends Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-  
+
     render() {
       return (
         <div>
           <h3>Steps to Do</h3>
           <TodoList items={this.state.items} />
           <form onSubmit={this.handleSubmit}>
-            
+
             <label htmlFor="new-todo">
               What needs to be done?
             </label>
@@ -158,11 +156,11 @@ class Counter extends Component {
         </div>
       );
     }
-  
+
     handleChange(e) {
       this.setState({ text: e.target.value });
     }
-  
+
     handleSubmit(e) {
       e.preventDefault();
       if (this.state.text.length === 0) {
@@ -178,7 +176,7 @@ class Counter extends Component {
       }));
     }
   }
-  
+
   class TodoList extends Component {
     render() {
       return (
