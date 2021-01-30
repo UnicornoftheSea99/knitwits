@@ -11,7 +11,7 @@ class App extends Component {
   render(){
     // to be coded next:
     // if context contains button click record, generate RowActionView
-    // else PatternSelectScreen 
+    // else PatternSelectScreen. how did i do this w/project data 
   return (
     <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
       <header className="App-header">
