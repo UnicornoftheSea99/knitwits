@@ -8,6 +8,9 @@ from hidden import *
 from flask_cors import CORS
 app = Flask(__name__, static_url_path='')
 CORS(app, resources={r"/api/*": {"origins": "*"}})
+def noquote(s):
+    return s
+pyrebase.quote = noquote
 
 config = {
     "apiKey": apiKey,
@@ -28,16 +31,16 @@ def hello():
 
 @app.route("/api/get/<hashVal>")
 def getHash(hashVal):
-    #figure out how to handle case if data is not present in here
     try:
-        jsonPage = db.child("hashes").equal_to(hashVal).get()
+        jsonPage = db.order_by_key().equal_to("-"+hashVal).get().val()
+        print(jsonPage)
         return jsonify(jsonPage)
     except Exception as ex:
-        print(ex)
+        print("error", ex)
         return jsonify({"error":"does not exist"})
 
 @app.route('/api/post/', methods = ['POST'])
 def helloText():
     pattern = request.form.get("pattern")
-    hashVal = db.child("hashes").push(pattern)
-    return jsonify({"hashVal":hashVal})
+    x = db.child(hash(pattern)).set(pattern)
+    return jsonify({"hashVal":hash(pattern)})
