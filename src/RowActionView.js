@@ -14,11 +14,12 @@ const MyContext = React.createContext();
   } else {
     alert("HTTP-Error: " + response.status);
   }};*/
+var partArr = [''];
 
 class RowActionView extends Component {
-    // static contextType = SmallContext;
+
     componentDidMount (){
-      var query = '';
+        var query = '';
       switch(MyContext.chosenPattern){
           case 'scarf':
           query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
@@ -34,14 +35,25 @@ class RowActionView extends Component {
           break;
       }
 
+      var query_code = query.split("/").pop();
       var xhr = new XMLHttpRequest();
       var json_obj, status = false;
       xhr.open("GET", query, true);
       xhr.onload = function (e) {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              console.log(xhr.response);
               var json_obj = JSON.parse(xhr.responseText);
+              var pattern = json_obj[query_code];
+              console.log(pattern);
+              var same = '';              
+              for (const n in pattern){
+                console.log(n["part"]);
+                if (pattern[n]["part"] !== same){
+                    partArr.push(n["part"]);
+                    same = n["part"];
+                }
+              }
+              console.log(partArr);
               status = true;
             } else {
               console.error(xhr.statusText);
