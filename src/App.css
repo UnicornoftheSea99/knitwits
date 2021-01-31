@@ -30,5 +30,12 @@ h2 {
   text-shadow: 2px 2px #000000;
   font-family: 'Slackey', cursive;
   color:whitesmoke;
-  background-color: #d9f1f1;
+  background-color: #bef5f5;
+}
+
+h3 {
+  /* text-shadow: 2px 2px #000000; */
+  font-family: 'Slackey', cursive;
+  color:black;
+  /* background-color: #d9f1f1; */
 }
