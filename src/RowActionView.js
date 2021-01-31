@@ -3,6 +3,9 @@ import React, { createContext, useContext, Component } from 'react';
 import { SmallContext } from './small-context.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
 
 /*async grabPattern = query => {
     let response = await fetch(query, {method: 'GET', redirect: 'follow'});
@@ -13,27 +16,31 @@ import Grid from '@material-ui/core/Grid';
     alert("HTTP-Error: " + response.status);
   }};*/
 var partArr = [''];
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+      marginRight: theme.spacing(2),
+      minWidth: 120
+    }}));
+
+//const formCtrl = useStyles().formControl;
 
 class RowActionView extends Component {
     static contextType = SmallContext;
     state = {
-        instructions: [],
-        query_code: "",
-        currentTicker:0
+        instructions: []
       }
     componentDidMount (){
         let context = this.context;
-        // const MmyContext = React.useContext(SmallContext);
         var query = context.query;
         console.log(query);
-
-      var query_code = query.split("/").pop();
-      this.setState({query_code:query_code})
+        var queryVal = query.split("/").pop();
 
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
-          this.setState({instructions:JSON.parse(data[query_code].replaceAll("\\\\", "\\")
+          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
                       .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
                       .replaceAll('"rows":1},,', '"rows":1},')
                       .replaceAll('"rows":1},}', '"rows":1}}'))})
@@ -44,24 +51,38 @@ class RowActionView extends Component {
         super(props);
       }
     render(){
-
+        var types = ['Legs that are Also Arms', 'Arms that are Also Legs'];
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
             </Grid>
             <Grid item xs={6}>
+              <div >
+                <FormControl >
+                    <InputLabel id="partDropdownLabel" htmlFor="partDropdown"> Parts </InputLabel>
+                            <Select
+                                autoWidth
+                                labelId="partDropdownLabel"
+                                id="partDropdown"
+                                name="partDropdown"
+                            >
+                                {types.map(type => (<option value={type}>{type}</option>))}
+                            </Select>
+                </FormControl>
+             </div>
               <Counter />
-              <p>Current instructions are {this.state.instructions["one"]}</p>
-
             </Grid>
             <Grid item xs={6}>
+
              {
-               Object.keys(this.state.instructions).map(item =>
-                <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
-               )
+               JSON.stringify(this.state.instructions)
+               // Object.keys(this.state.instructions).map(item =>
+               //  <p><b>{item}</b></p> //{this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+               // )
              }
 
             </Grid>
-          </Grid>);
+          </Grid>
+        );
     }
 }
 
@@ -127,7 +148,5 @@ class Counter extends Component {
       )
     }
   }
-
-  
 
 export default RowActionView;
