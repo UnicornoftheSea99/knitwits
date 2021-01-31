@@ -7,15 +7,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 
-/*async grabPattern = query => {
-    let response = await fetch(query, {method: 'GET', redirect: 'follow'});
-    if (response.ok) { // if HTTP-status is 200-299
-    // get the response body (the method explained below)
-    let json = await response.json();
-  } else {
-    alert("HTTP-Error: " + response.status);
-  }};*/
-var partArr = [''];
 const useStyles = makeStyles((theme) => ({
     formControl: {
       marginTop: theme.spacing(1),
@@ -25,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
     }}));
 
 //const formCtrl = useStyles().formControl;
+
+var isDrawn=false;
 
 class RowActionView extends Component {
     static contextType = SmallContext;
@@ -56,6 +49,8 @@ class RowActionView extends Component {
           }
         }
       )
+       var same =''; 
+      
     }
     updateCurrent(newNum){
       this.setState({current: newNum})
@@ -64,24 +59,38 @@ class RowActionView extends Component {
         super(props);
         this.updateCurrent = this.updateCurrent.bind(this);
         this.saveProgress = this.saveProgress.bind(this);
+        this.stateInit = this.stateInit.bind(this);
       }
 
     saveProgress(event){
-        this.setState({currentPart: event.target.value}); 
+        this.setState({currentPart: event.target.value});
+        console.log(event.target.value);
+        var index = this.state.partTypes.indexOf(event.target.value);
+        console.log(this.state.partTypes);
+        console.log(index);
+        var newNum = this.state.rowMarks[index];
+        console.log(newNum); 
+        this.updateCurrent(newNum);
+    }
+
+    stateInit(){
+        this.setState({currentPart: ' '});
     }
 
     render(){
-        // this, instructions something else i need to peee
         var same = '';
+        //if(isDrawn == false){
             for (const key in this.state.instructions){
-                if (this.state.instructions[key].part !== same){
-                    this.state.partTypes.push(this.state.instructions[key].part);
-                    this.state.rowMarks.push(key);
-                    same = this.state.instructions[key].part;
-                    console.log(this.state.instructions[key].part);
+                if (this.state.partTypes.indexOf(this.state.instructions[key].part) < 0){
+                        this.state.partTypes.push(this.state.instructions[key].part);
+                        this.state.rowMarks.push(key);
+                        same = this.state.instructions[key].part;
+                        console.log(this.state.rowMarks);
                 }
             }
-        
+            isDrawn=true;
+        //}
+
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
             </Grid>
