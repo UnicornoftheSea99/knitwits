@@ -13,12 +13,13 @@ import CustomPattern from "./CustomPattern.js"
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={patternPicked: false, custom: false, chosenPattern: '', // haha. beefault
+    this.state={patternPicked: false, custom: false, curious: false, chosenPattern: '', // haha. beefault
     decideScarf: this.decideScarf.bind(this),
     decideBee: this.decideBee.bind(this),
     decidePlushie: this.decidePlushie.bind(this),
     customPattern: this.customPattern.bind(this),
     customPatternView:this.customPatternView.bind(this),
+    aboutUs: this.aboutUs.bind(this),
     query:''};
   }
 
@@ -50,14 +51,20 @@ class App extends Component {
     console.log("doing things?")
   }
 
+  aboutUs(){
+    this.setState({patternPicked: true, curious: true})
+
+  }
 
   render(){
     const picked = this.state.patternPicked;
     const isCustom = this.state.custom;
+    const isCurious = this.state.curious;
     let view;
     view = (<PatternSelectScreen/>);
     if (picked) {view = (<RowActionView/>);}
     if (picked && isCustom) {view= (<CustomPattern/>);}
+    if (picked && isCurious) {view= (<AboutUs/>);}
 
     return (
       // <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
@@ -72,7 +79,7 @@ class App extends Component {
         <SmallContext.Provider value={this.state}>
           {view}
         </SmallContext.Provider>
-        <AboutUs />
+        {/* <AboutUs /> */}
     </div>
   );
 }
