@@ -33,11 +33,10 @@ class RowActionView extends Component {
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
-          console.log(data[query_code])
-          this.setState({instructions:JSON.parse(data[query_code].replaceAll("\\\\", "\\")
-                      .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
-                      .replaceAll('"rows":1},,', '"rows":1},')
-                      .replaceAll('"rows":1},}', '"rows":1}}'))})
+          var enterVal = data[query_code]
+          enterVal = enterVal.replaceAll("\\\\", "\\").replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},').replaceAll('"rows":1},,', '"rows":1},').replace(/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, "").replaceAll('"rows":1},}', '"rows":1}}'));
+
+          console.log(enterVal)
         }
       )
     }
@@ -129,6 +128,6 @@ class Counter extends Component {
     }
   }
 
-  
+
 
 export default RowActionView;
