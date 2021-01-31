@@ -28,7 +28,7 @@ const images = [
         width: '30%',
       },
   ];
-  
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -141,7 +141,7 @@ return (
             focusVisibleClassName={classes.focusVisible}
             style={{
                  width: images[0].width,
-             
+
             }}
             onClick={() => {myContext.decideBee()}}
             >
@@ -232,7 +232,7 @@ return (
             </ButtonBase>
         {/* </Grid> */}
 
-       
+
         <div style={emptyDiv}>
         </div>
 
@@ -271,16 +271,16 @@ return (
         {/* </Grid>   */}
 
         < Grid item xs={6}>
-        </Grid>     
+        </Grid>
         < Grid item xs={12}>
         <form style={{margin:"10px"}}>
              <label for="custom-code"style={{margin:"10px"}}>Got a custom pattern code? Enter it here:</label>
              <input type="text" id="custom-code" name="custom-code"></input>
             <button style={{margin:"10px"}}>Submit</button>
          </form>
-        </Grid>      
+        </Grid>
     </Grid>
-        
+
 
     </div>
   );

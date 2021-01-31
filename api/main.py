@@ -2,11 +2,19 @@ from flask import Flask
 import csv
 import json
 from flask import jsonify
+from flask import render_template
 from pyrebase import pyrebase
 from flask import request
 from hidden import *
 from flask_cors import CORS
-app = Flask(__name__, static_url_path='')
+import pdfkit
+import ast
+
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='web/static',
+            template_folder='templates')
+
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 def noquote(s):
     return s
@@ -32,7 +40,7 @@ def hello():
 @app.route("/api/get/<hashVal>")
 def getHash(hashVal):
     try:
-        jsonPage = db.order_by_key().equal_to("-"+hashVal).get().val()
+        jsonPage = db.order_by_key().equal_to(hashVal).get().val()
         print(jsonPage)
         return jsonify(jsonPage)
     except Exception as ex:
@@ -43,13 +51,19 @@ def getHash(hashVal):
 def helloText():
     pattern = request.form.get("pattern")
     x = db.child(hash(pattern)).set(pattern)
-    return jsonify({"hashVal":hash(pattern)})
+    return jsonify({"hashVal":"-"+hash(pattern)})
 
 @app.route('/api/pdf/<hashVal>', methods=["GET"])
-def getPDF():
+def getPDF(hashVal):
     try:
-        jsonPage = db.order_by_key().equal_to("-"+hashVal).get().val()
-        return jsonify(jsonPage)
+        jsonPage = db.order_by_key().equal_to(hashVal).get().val()
+        #fix text in database so we don't use this solution
+        text = jsonPage[hashVal].replace("\\\\", "\\").replace("/", "of").replace('"rows":1}', '"rows":1},').replace('"rows":1},,', '"rows":1},').replace('"rows":1},}', '"rows":1}}')
+        text = json.loads(text)
+        x = render_template("patternpdf.html", text=text, hashVal = hashVal)
+        pdfkit.from_string(x, False)
+        return x
+
     except Exception as ex:
         print("error", ex)
         return jsonify({"error":"does not exist"})

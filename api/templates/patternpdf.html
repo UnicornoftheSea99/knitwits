@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hash: {{hashVal}}</title>
+    <style>
+
+      * {
+        font-family: Arial;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <h1>Hash: {{hashVal}}</h1>
+    {% for instruction in text%}
+    <p><b>{{instruction}}</b> part: {{text[instruction]['part']}} instructions: {{text[instruction]['instructions']}} rows: {{text[instruction]['rows']}}</p>
+    {% endfor %}
+
+  </body>
+</html>

@@ -16,6 +16,9 @@ var partArr = [''];
 
 class RowActionView extends Component {
     static contextType = SmallContext;   
+    state = {
+        instructions: []
+      }
     componentDidMount (){
         let context = this.context;
         // const MmyContext = React.useContext(SmallContext);
@@ -23,41 +26,22 @@ class RowActionView extends Component {
         console.log(query);
 
       var query_code = query.split("/").pop();
-      var xhr = new XMLHttpRequest();
-      var json_obj, status = false;
-      xhr.open("GET", query, true);
-      xhr.onload = function (e) {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              var json_obj = JSON.parse(xhr.responseText);
-              var pattern = json_obj[query_code];
-              console.log(pattern);
-              var same = '';              
-              for (const n in pattern){
-                // console.log(n["part"]);
-                if (pattern[n]["part"] !== same){
-                    partArr.push(n["part"]);
-                    same = n["part"];
-                }
-              }
-              console.log(partArr);
-              status = true;
-            } else {
-              console.error(xhr.statusText);
-            }
-          }
-        }.bind(this);
-        xhr.onerror = function (e) {
-          console.error(xhr.statusText);
-        };
-        xhr.send(null);
 
+      fetch(query)
+      .then(res => res.json())
+      .then((data) =>{
+          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
+                      .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
+                      .replaceAll('"rows":1},,', '"rows":1},')
+                      .replaceAll('"rows":1},}', '"rows":1}}'))})
+        }
+      )
     }
     constructor(props) {
         super(props);
       }
-
     render(){
+
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
             </Grid>
@@ -66,6 +50,12 @@ class RowActionView extends Component {
             </Grid>
             <Grid item xs={6}>
              <TodoApp />
+             {
+               Object.keys(this.state.instructions).map(item =>
+                <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+               )
+             }
+
             </Grid>
           </Grid>);
     }
