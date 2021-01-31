@@ -67,8 +67,8 @@ class RowActionView extends Component {
             <Grid item xs={12}>
             </Grid>
             <Grid item xs={6}>
-              <div >
-                <FormControl >
+              <div style={{margin:"20px"}}>
+                <FormControl variant="outlined" fullWidth={true}>
                     <InputLabel id="partDropdownLabel" htmlFor="partDropdown"> Parts </InputLabel>
                             <Select
                                 autoWidth
@@ -81,9 +81,8 @@ class RowActionView extends Component {
                 </FormControl>
              </div>
               <Counter updateCurrent={this.updateCurrent}/>
-              <b>Current instruction</b><br />
               {
-                this.state.current>=0 ? JSON.stringify(this.state.instructions[this.state.current]) : "Out of range"
+                ((this.state.instructions[this.state.current]!== undefined) && this.state.current>=0) ? this.state.instructions[this.state.current].instructions : "Out of range"
               }
             </Grid>
             <Grid item xs={6}>
