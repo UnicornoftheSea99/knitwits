@@ -27,6 +27,11 @@ const images = [
         title: 'Create Your Own Pattern',
         width: '30%',
       },
+      {
+        url: './aboutus.png',
+        title: 'About Us',
+        width: '30%',
+      },
   ];
 
   const useStyles = makeStyles((theme) => ({
@@ -135,11 +140,52 @@ export default function PatternSelectScreen(){
 
 return (
     <div className={classes.root}>
+       {/* About Us */}
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <h2>About Us</h2>
+        </Grid>
+    <ButtonBase
+            focusRipple
+            key={images[4].title}
+            className={classes.image}
+            focusVisibleClassName={classes.focusVisible}
+            style={{
+                 width: images[4].width,
+
+            }}
+            onClick={() => {myContext.aboutUs()}}
+            >
+            <span
+                className={classes.imageSrc}
+                style={{
+                backgroundImage: `url(${images[4].url})`,
+                }}
+            />
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+                <Typography
+                component="span"
+                variant="subtitle1"
+                color="inherit"
+                className={classes.imageTitle}
+                >
+                {images[4].title}
+                <span className={classes.imageMarked} />
+                </Typography>
+            </span>
+            </ButtonBase>
+            <Grid item xs={12}>
+        </Grid>
+    </Grid>
+
+
     <Grid container spacing={3}>
         {/* <Grid item xs={6}> */}
         {/* <div style={emptyDiv}>
         </div>  */}
         <Grid item xs={12}>
+          <h2>Patterns</h2>
         </Grid>
         {/* Bee */}
             <ButtonBase
