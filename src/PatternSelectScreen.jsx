@@ -246,8 +246,7 @@ return (
                 style={{
                     width: images[3].width,
                 }}
-                //   onClick={() => {myContext.decidePlushie()}}
-                disabled
+                   onClick={() => {myContext.customPattern()}}
                 >
                 <span
                     className={classes.imageSrc}
