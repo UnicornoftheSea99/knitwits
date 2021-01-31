@@ -17,6 +17,7 @@ class App extends Component {
     decideBee: this.decideBee.bind(this),
     decidePlushie: this.decidePlushie.bind(this),
     customPattern: this.customPattern.bind(this),
+    customPatternView:this.customPatternView.bind(this),
     query:''};
   }
 
@@ -40,7 +41,14 @@ class App extends Component {
 
   customPattern(){
     this.setState({patternPicked: true, custom: true})
+
   }
+  customPatternView(queryArg){
+    console.log("please clap")
+    this.setState({patternPicked: true, query:"https://knitwits.ue.r.appspot.com/api/get/"+queryArg});
+    console.log("doing things?")
+  }
+
 
   render(){
     const picked = this.state.patternPicked;

@@ -104,9 +104,17 @@ const images = [
     },
   }));
 
+
 export default function PatternSelectScreen(){
     const myContext=useContext(SmallContext);
     const classes = useStyles();
+    const formAction = (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target),
+      formDataObj = Object.fromEntries(formData.entries())
+      myContext.customPatternView(formDataObj.pattern)
+    }
+
     const emptyDiv={
         height:'10px',
         width: '100%',
@@ -272,9 +280,9 @@ return (
         < Grid item xs={6}>
         </Grid>
         < Grid item xs={12}>
-        <form style={{margin:"10px"}}>
+        <form style={{margin:"10px"}} onSubmit={formAction}>
              <label for="custom-code"style={{margin:"10px"}}>Got a custom pattern code? Enter it here:</label>
-             <input type="text" id="custom-code" name="custom-code"></input>
+             <input type="text" id="pattern" name="pattern"></input>
             <button style={{margin:"10px"}}>Submit</button>
          </form>
         </Grid>
