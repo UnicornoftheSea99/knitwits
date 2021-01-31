@@ -28,7 +28,7 @@ const images = [
         width: '30%',
       },
   ];
-  
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -101,13 +101,13 @@ const images = [
       transition: theme.transitions.create('opacity'),
     },
   }));
-  
+
 
 
 export default function PatternSelectScreen(){
     const myContext=useContext(SmallContext);
     const classes = useStyles();
-   
+
     // okay cool what do i do with my context now
 
     // return(<div style={{margin:"10px"}}>
@@ -125,7 +125,7 @@ export default function PatternSelectScreen(){
 return (
     <div className={classes.root}>
       {/* {images.map((image) => ( */}
-        
+
         {/* Bee */}
         <ButtonBase
           focusRipple

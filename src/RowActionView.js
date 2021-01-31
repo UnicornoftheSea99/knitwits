@@ -17,9 +17,16 @@ const MyContext = React.createContext();
 var partArr = [''];
 
 class RowActionView extends Component {
+    state = {
+      instructions: []
+    }
+    // setCharAt(str,index,chr) {
+    //   if(index > str.length-1) return str;
+    //   return str.substring(0,index) + chr + str.substring(index+1);
+    // }
 
     componentDidMount (){
-        var query = '';
+      var query = '';
       switch(MyContext.chosenPattern){
           case 'scarf':
           query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
@@ -30,44 +37,28 @@ class RowActionView extends Component {
       case 'plushie':
           query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
           break;
+      default:
+          console.log("no query")
+          query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
       }
+      var queryVal;
+      queryVal = query.split("/").pop()
 
-      var query_code = query.split("/").pop();
-      var xhr = new XMLHttpRequest();
-      var json_obj, status = false;
-      xhr.open("GET", query, true);
-      xhr.onload = function (e) {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              var json_obj = JSON.parse(xhr.responseText);
-              var pattern = json_obj[query_code];
-              console.log(pattern);
-              var same = '';              
-              for (const n in pattern){
-                console.log(n["part"]);
-                if (pattern[n]["part"] !== same){
-                    partArr.push(n["part"]);
-                    same = n["part"];
-                }
-              }
-              console.log(partArr);
-              status = true;
-            } else {
-              console.error(xhr.statusText);
-            }
-          }
-        }.bind(this);
-        xhr.onerror = function (e) {
-          console.error(xhr.statusText);
-        };
-        xhr.send(null);
-
+      fetch(query)
+      .then(res => res.json())
+      .then((data) =>{
+          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
+                      .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
+                      .replaceAll('"rows":1},,', '"rows":1},')
+                      .replaceAll('"rows":1},}', '"rows":1}}'))})
+        }
+      )
     }
     constructor(props) {
         super(props);
       }
-
     render(){
+
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
               <h1> Welcome </h1>
@@ -77,6 +68,12 @@ class RowActionView extends Component {
             </Grid>
             <Grid item xs={6}>
              <TodoApp />
+             {
+               Object.keys(this.state.instructions).map(item =>
+                <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+               )
+             }
+
             </Grid>
           </Grid>);
     }
