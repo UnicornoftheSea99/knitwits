@@ -25,19 +25,19 @@ class App extends Component {
 
   decideScarf(){
     this.setState({patternPicked: true, chosenPattern: 'scarf',
-    query:'https://knitwits.ue.r.appspot.com/api/get/-7269468165908292738'});
+    query:'https://api-knitwits.ue.r.appspot.com/api/get/-7269468165908292738'});
     console.log("scarf!");
   }
 
   decideBee(){
     this.setState({patternPicked: true, chosenPattern: 'bee',
-    query:'https://knitwits.ue.r.appspot.com/api/get/-7378964869400283023'});
+    query:'https://api-knitwits.ue.r.appspot.com/api/get/-7378964869400283023'});
     console.log("bee!");
   }
 
   decidePlushie(){
     this.setState({patternPicked: true, chosenPattern: 'plushie',
-    query:'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'});
+    query:'https://api-knitwits.ue.r.appspot.com/api/get/-4778850897406943288'});
     console.log("plushie!");
   }
 
@@ -47,7 +47,7 @@ class App extends Component {
   }
   customPatternView(queryArg){
     console.log("please clap")
-    this.setState({patternPicked: true, query:"https://knitwits.ue.r.appspot.com/api/get/"+queryArg});
+    this.setState({patternPicked: true, query:"https://api-knitwits.ue.r.appspot.com/api/get/"+queryArg});
     console.log("doing things?")
   }
 
