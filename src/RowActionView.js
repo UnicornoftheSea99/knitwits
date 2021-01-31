@@ -56,8 +56,8 @@ class RowActionView extends Component {
             <Grid item xs={12}>
             </Grid>
             <Grid item xs={6}>
-              <div >
-                <FormControl >
+              <div style={{margin:"20px"}}>
+                <FormControl variant="outlined" fullWidth={true}>
                     <InputLabel id="partDropdownLabel" htmlFor="partDropdown"> Parts </InputLabel>
                             <Select
                                 autoWidth
