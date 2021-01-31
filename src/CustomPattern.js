@@ -4,7 +4,8 @@ class CustomPattern extends Component{
   constructor(props){
     super(props);
     this.state = {currRow:0,
-                  instructions:{}
+                  instructions:{},
+                  topPost:"None so far"
                 }
     this.formAction = this.formAction.bind(this);
     this.postToWeb = this.postToWeb.bind(this);
@@ -18,8 +19,17 @@ class CustomPattern extends Component{
     this.setState({instructions:newInstructions});
     this.setState({currRow:this.state.currRow+1})
   }
-  postToWeb(props){
+  async postToWeb(props){
     console.log(this.state.instructions)
+    var myForm = new FormData
+    myForm.append("pattern", JSON.stringify(this.state.instructions));
+    const response = await fetch("http://localhost:5000/api/post/", {
+      method: "POST",
+      body: myForm
+    });
+    const content = await response.json();
+    console.log(content.hashVal);
+    this.setState({topPost:content.hashVal})
   }
 
   render(){
@@ -27,7 +37,7 @@ class CustomPattern extends Component{
         <div>
         {
           Object.keys(this.state.instructions).map(item =>
-            <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+            <p><b>Row: {item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
           )
         }
         <form style={{margin:"10px"}} onSubmit={this.formAction}>
@@ -42,7 +52,8 @@ class CustomPattern extends Component{
           <button style={{margin:"10px"}}>Add to Pattern</button><br />
          </form>
          <button style={{margin:"10px"}} onClick={this.postToWeb}>Post to the web!</button><br />
-
+         <h2>Your Hash Value</h2>
+         {this.state.topPost}
         </div>
       );
 

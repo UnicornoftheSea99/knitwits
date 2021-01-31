@@ -50,7 +50,7 @@ def getHash(hashVal):
 def helloText():
     pattern = request.form.get("pattern")
     x = db.child(hash(pattern)).set(pattern)
-    return jsonify({"hashVal":"-"+hash(pattern)})
+    return jsonify({"hashVal":str(hash(pattern))})
 
 @app.route('/api/pdf/<hashVal>', methods=["GET"])
 def getPDF(hashVal):
