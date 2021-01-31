@@ -62,7 +62,17 @@ class RowActionView extends Component {
         this.updateCurrent = this.updateCurrent.bind(this)
       }
     render(){
-        var types = ['Legs that are Also Arms', 'Arms that are Also Legs'];
+        // this, instructions something else i need to peee
+        var types = [''];
+        var same = ''
+        console.log(this.state.instructions);
+        for (const key in this.state.instructions){
+            if (this.state.instructions[key].part !== same){
+                types.push(this.state.instructions[key].part);
+                same = this.state.instructions[key].part;
+                console.log(this.state.instructions[key].part);
+            }
+        }
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
             </Grid>
