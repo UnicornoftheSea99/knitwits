@@ -66,14 +66,13 @@ class App extends Component {
     if (picked && isCustom) {view= (<CustomPattern/>);}
     if (picked && isCurious) {view= (<AboutUs/>);}
     if (picked==false) {view= (<PatternSelectScreen/>);}
-
     return (
       <div className="App" style={{backgroundColor:"whitesmoke", color:"#404022"}}>
         <header className="App-header">
          <h1> KnitWits </h1>
         <Button
-          startIcon={<Avatar src={'./IMG_0069.png'} 
-          onClick={() => {this.setState({patternPicked: false})}}
+          startIcon={<Avatar src={'./IMG_0069.png'}
+          onClick={() => {this.setState({patternPicked: false});this.setState({patternPicked: false, curious: false, custom:false});}}
           style={{ height: '115px', width: '130px' }}
           variant="square"></Avatar>}
           >
