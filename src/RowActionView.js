@@ -44,7 +44,7 @@ class RowActionView extends Component {
               console.log(pattern);
               var same = '';              
               for (const n in pattern){
-                console.log(n["part"]);
+                // console.log(n["part"]);
                 if (pattern[n]["part"] !== same){
                     partArr.push(n["part"]);
                     same = n["part"];
