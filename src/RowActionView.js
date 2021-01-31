@@ -92,7 +92,7 @@ class RowActionView extends Component {
              </div>
               <Counter updateCurrent={this.updateCurrent}/>
               {
-                ((this.state.instructions[this.state.current]!== undefined) && this.state.current>=0) ? this.state.instructions[this.state.current].instructions : "Out of range"
+                ((this.state.instructions[this.state.current]!== undefined) && this.state.current>=0) ? "Current Instruction: "+this.state.instructions[this.state.current].instructions : "Out of range"
               }
             </Grid>
             <Grid item xs={6}>
