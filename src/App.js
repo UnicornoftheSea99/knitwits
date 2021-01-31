@@ -7,15 +7,16 @@ import React, { Component } from 'react';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import AboutUs from './AboutUs.js';
-
+import TodoApp from './ToDo.js';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={patternPicked: false, chosenPattern: '', // haha. beefault
+    this.state={patternPicked: false, custom: false, chosenPattern: '', // haha. beefault
     decideScarf: this.decideScarf.bind(this),
     decideBee: this.decideBee.bind(this),
     decidePlushie: this.decidePlushie.bind(this),
+    customPattern: this.customPattern.bind(this),
     query:''};
   }
 
@@ -37,11 +38,17 @@ class App extends Component {
     console.log("plushie!");
   }
 
+  customPattern(){
+    this.setState({patternPicked: true, custom: true})
+  }
+
   render(){
     const picked = this.state.patternPicked;
+    const isCustom = this.state.custom;
     let view;
     view = (<PatternSelectScreen/>);
     if (picked) {view = (<RowActionView/>);}
+    if (picked && isCustom) {view= (<TodoApp/>);}
 
     return (
       // <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
