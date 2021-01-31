@@ -327,9 +327,9 @@ return (
         </Grid>
         < Grid item xs={12}>
         <form style={{margin:"10px"}} onSubmit={formAction}>
-             <label for="custom-code"style={{margin:"10px"}}>Got a custom pattern code? Enter it here:</label>
-             <input type="text" id="pattern" name="pattern"></input>
-            <button style={{margin:"10px"}}>Submit</button>
+             <label for="custom-code"style={{margin:"10px", fontSize:"30px"}}>Got a custom pattern code? Enter it here:</label>
+             <input type="text" id="pattern" name="pattern" style={{fontSize:"30px"}}></input>
+            <button style={{margin:"10px", fontSize:"30px"}}>Submit</button>
          </form>
         </Grid>
     </Grid>
