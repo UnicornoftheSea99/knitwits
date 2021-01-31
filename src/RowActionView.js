@@ -77,9 +77,8 @@ class RowActionView extends Component {
                 </FormControl>
              </div>
               <Counter updateCurrent={this.updateCurrent}/>
-              <b>Current instruction</b><br />
               {
-                this.state.current>=0 ? JSON.stringify(this.state.instructions[this.state.current]) : "Out of range"
+                ((this.state.instructions[this.state.current]!== undefined) && this.state.current>=0) ? this.state.instructions[this.state.current].instructions : "Out of range"
               }
             </Grid>
             <Grid item xs={6}>
