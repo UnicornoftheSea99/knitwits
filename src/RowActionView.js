@@ -18,21 +18,22 @@ class RowActionView extends Component {
     static contextType = SmallContext;
     state = {
         instructions: [],
-        query_code: "",
         currentTicker:0
       }
+    updateParentCount(newCount) {
+      this.setState({currentTicker: newCount})
+    }
     componentDidMount (){
-        let context = this.context;
-        // const MmyContext = React.useContext(SmallContext);
-        var query = context.query;
-        console.log(query);
+      let context = this.context;
+      // const MmyContext = React.useContext(SmallContext);
+      var query = context.query;
 
       var query_code = query.split("/").pop();
-      this.setState({query_code:query_code})
 
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
+          console.log(data[query_code])
           this.setState({instructions:JSON.parse(data[query_code].replaceAll("\\\\", "\\")
                       .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
                       .replaceAll('"rows":1},,', '"rows":1},')
@@ -50,7 +51,7 @@ class RowActionView extends Component {
             </Grid>
             <Grid item xs={6}>
               <Counter />
-              <p>Current instructions are {this.state.instructions["one"]}</p>
+              <p>Current instructions are {this.state.instructions[1]}</p>
 
             </Grid>
             <Grid item xs={6}>
