@@ -29,13 +29,16 @@ const useStyles = makeStyles((theme) => ({
 class RowActionView extends Component {
     static contextType = SmallContext;
     state = {
-        instructions: []
+        instructions: [],
+        query:"",
+        current:0
       }
     componentDidMount (){
         let context = this.context;
         var query = context.query;
         console.log(query);
         var queryVal = query.split("/").pop();
+        this.setState({query:query})
 
       fetch(query)
       .then(res => res.json())
@@ -47,8 +50,12 @@ class RowActionView extends Component {
         }
       )
     }
+    updateCurrent(newNum){
+      this.setState({current: newNum})
+    }
     constructor(props) {
         super(props);
+        this.updateCurrent = this.updateCurrent.bind(this)
       }
     render(){
         var types = ['Legs that are Also Arms', 'Arms that are Also Legs'];
@@ -69,15 +76,20 @@ class RowActionView extends Component {
                             </Select>
                 </FormControl>
              </div>
-              <Counter />
+              <Counter updateCurrent={this.updateCurrent}/>
+              <b>Current instruction</b><br />
+              {
+                this.state.current>=0 ? JSON.stringify(this.state.instructions[this.state.current]) : "Out of range"
+              }
             </Grid>
             <Grid item xs={6}>
 
+            <a target="_blank" href={this.state.query.replace("get", "pdf")}>Printer friendly version</a>
+
              {
-               JSON.stringify(this.state.instructions)
-               // Object.keys(this.state.instructions).map(item =>
-               //  <p><b>{item}</b></p> //{this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
-               // )
+               Object.keys(this.state.instructions).map(item =>
+                <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+               )
              }
 
             </Grid>
@@ -99,12 +111,14 @@ class Counter extends Component {
         count: count + 1,
         left: left -1
       }));
+      this.props.updateCurrent(this.state.count);
     };
     minusClick = () => {
       this.setState(({ count,left }) => ({
         count: count - 1,
         left: left +1
       }));
+      this.props.updateCurrent(this.state.count);
     };
 
     handleChange(e) {
