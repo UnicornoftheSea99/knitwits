@@ -1,14 +1,14 @@
-//import logo from './logo.svg';
+
 import './App.css';
 import PatternSelectScreen from './PatternSelectScreen.jsx';
 import RowActionView from './RowActionView.js';
 import { SmallContext } from './small-context.js';
 import React, { Component } from 'react';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
 import AboutUs from './AboutUs.js';
 import TodoApp from './ToDo.js';
 import CustomPattern from "./CustomPattern.js"
+import Button from '@material-ui/core/Button';
+import Avatar from "@material-ui/core/Avatar";
 
 class App extends Component {
   constructor(props){
@@ -25,19 +25,19 @@ class App extends Component {
 
   decideScarf(){
     this.setState({patternPicked: true, chosenPattern: 'scarf',
-    query:'https://api-knitwits.ue.r.appspot.com/api/get/-7269468165908292738'});
+    query:'https://api-dot-knitwits.ue.r.appspot.com/api/get/-7269468165908292738'});
     console.log("scarf!");
   }
 
   decideBee(){
     this.setState({patternPicked: true, chosenPattern: 'bee',
-    query:'https://api-knitwits.ue.r.appspot.com/api/get/-7378964869400283023'});
+    query:'https://api-dot-knitwits.ue.r.appspot.com/api/get/-7378964869400283023'});
     console.log("bee!");
   }
 
   decidePlushie(){
     this.setState({patternPicked: true, chosenPattern: 'plushie',
-    query:'https://api-knitwits.ue.r.appspot.com/api/get/-4778850897406943288'});
+    query:'https://api-dot-knitwits.ue.r.appspot.com/api/get/-4778850897406943288'});
     console.log("plushie!");
   }
 
@@ -47,72 +47,49 @@ class App extends Component {
   }
   customPatternView(queryArg){
     console.log("please clap")
-    this.setState({patternPicked: true, query:"https://api-knitwits.ue.r.appspot.com/api/get/"+queryArg});
+    this.setState({patternPicked: true, query:"https://api-dot-knitwits.ue.r.appspot.com/api/get/"+queryArg});
     console.log("doing things?")
   }
 
   aboutUs(){
     this.setState({patternPicked: true, curious: true})
-
   }
 
   render(){
     const picked = this.state.patternPicked;
     const isCustom = this.state.custom;
     const isCurious = this.state.curious;
+
     let view;
     view = (<PatternSelectScreen/>);
     if (picked) {view = (<RowActionView/>);}
     if (picked && isCustom) {view= (<CustomPattern/>);}
     if (picked && isCurious) {view= (<AboutUs/>);}
+    if (picked==false) {view= (<PatternSelectScreen/>);}
 
     return (
-      // <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
       <div className="App" style={{backgroundColor:"whitesmoke", color:"#404022"}}>
         <header className="App-header">
          <h1> KnitWits </h1>
-         <img src={'./IMG_0069.png'} />
+        <Button
+          startIcon={<Avatar src={'./IMG_0069.png'} 
+          onClick={() => {this.setState({patternPicked: false})}}
+          style={{ height: '115px', width: '130px' }}
+          variant="square"></Avatar>}
+          >
+          </Button>
+         {/* <img src={'./IMG_0069.png'} /> */}
          <SmallContext.Provider>
-           {/* <Breadcrumb1 /> */}
          </SmallContext.Provider>
         </header>
         <SmallContext.Provider value={this.state}>
           {view}
         </SmallContext.Provider>
-        {/* <AboutUs /> */}
     </div>
   );
 }
 }
 
-// function handleClick(event) {
-//   event.preventDefault();
-//   console.info('You clicked a breadcrumb.');
-// }
 
-// class Breadcrumb1 extends Component {
-//   static contextType = SmallContext;
-//   render() {
-//      let context = this.context;
-//   return (
-//     <Breadcrumbs aria-label="breadcrumb">
-//       <Link color="inherit" href="/" onClick={context.whateverFn()}>
-//         Home
-//       </Link>
-//       {/* <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
-//         Core
-//       </Link> */}
-//       <Link
-//         color="textPrimary"
-//         href="/components/breadcrumbs/"
-//         onClick={handleClick}
-//         aria-current="page"
-//       >
-//         Crochet Bee
-//       </Link>
-//     </Breadcrumbs>
-//   );
-// }
-// }
 
 export default App;
