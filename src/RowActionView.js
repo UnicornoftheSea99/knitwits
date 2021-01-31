@@ -1,6 +1,6 @@
 import './App.css';
 import React, { createContext, Component } from 'react';
-import { SmallContext } from './small-context.js'
+import { SmallContext } from './small-context.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
@@ -70,7 +70,6 @@ class RowActionView extends Component {
     render(){
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
-              <h1> Welcome </h1>
             </Grid>
             <Grid item xs={6}>
               <Counter />
@@ -117,6 +116,7 @@ class Counter extends Component {
        display: "inline-block",
        border: "none",
         color: "black",
+        backgroundColor: "gray",
         padding: "15px 32px",
         margin: "15px",
 

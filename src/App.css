@@ -9,11 +9,9 @@
   display: flex;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  /* color: wheat; */
   color:whitesmoke;
-  /* font-family: 'Codystar', cursive; */
   font-family: 'Slackey', cursive;
-  /* font-family: 'Rubik Mono One', sans-serif; */
+ 
 
 
 }
@@ -22,4 +20,15 @@ img{
   border-radius: 4px;
   padding: 5px;
   width: 150px;
+}
+
+h1 {
+  text-shadow: 2px 2px #000000;
+}
+
+h2 {
+  text-shadow: 2px 2px #000000;
+  font-family: 'Slackey', cursive;
+  color:whitesmoke;
+  background-color: #d9f1f1;
 }
