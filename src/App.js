@@ -49,7 +49,9 @@ class App extends Component {
         <header className="App-header">
          <h1> KnitWits </h1>
          <img src={'./IMG_0069.png'} />
-         {/* <Breadcrumb1 /> */}
+         <SmallContext.Provider>
+           {/* <Breadcrumb1 /> */}
+         </SmallContext.Provider>
         </header>
         <SmallContext.Provider value={this.state}>
           {view}
@@ -66,11 +68,12 @@ class App extends Component {
 // }
 
 // class Breadcrumb1 extends Component {
-  
+//   static contextType = SmallContext;
 //   render() {
+//      let context = this.context;
 //   return (
 //     <Breadcrumbs aria-label="breadcrumb">
-//       <Link color="inherit" href="/" onClick={handleClick}>
+//       <Link color="inherit" href="/" onClick={context.whateverFn()}>
 //         Home
 //       </Link>
 //       {/* <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
