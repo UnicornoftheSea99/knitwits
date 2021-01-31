@@ -8,6 +8,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import AboutUs from './AboutUs.js';
 import TodoApp from './ToDo.js';
+import CustomPattern from "./CustomPattern.js"
 
 class App extends Component {
   constructor(props){
@@ -56,7 +57,7 @@ class App extends Component {
     let view;
     view = (<PatternSelectScreen/>);
     if (picked) {view = (<RowActionView/>);}
-    if (picked && isCustom) {view= (<TodoApp/>);}
+    if (picked && isCustom) {view= (<CustomPattern/>);}
 
     return (
       // <div className="App" style={{backgroundColor:"wheat", color:"#404022"}}>
