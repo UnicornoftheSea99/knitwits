@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 /* design intentionally sucks so when we improve ui it's universal */
-
 const images = [
     {
       url: './IMG_6903.jpg',
@@ -29,7 +28,7 @@ const images = [
         width: '30%',
       },
   ];
-  
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -104,8 +103,6 @@ const images = [
       transition: theme.transitions.create('opacity'),
     },
   }));
-  
-
 
 export default function PatternSelectScreen(){
     const myContext=useContext(SmallContext);
@@ -144,7 +141,7 @@ return (
             focusVisibleClassName={classes.focusVisible}
             style={{
                  width: images[0].width,
-             
+
             }}
             onClick={() => {myContext.decideBee()}}
             >
@@ -235,7 +232,7 @@ return (
             </ButtonBase>
         {/* </Grid> */}
 
-       
+
         <div style={emptyDiv}>
         </div>
 
@@ -274,16 +271,16 @@ return (
         {/* </Grid>   */}
 
         < Grid item xs={6}>
-        </Grid>     
+        </Grid>
         < Grid item xs={12}>
         <form style={{margin:"10px"}}>
              <label for="custom-code"style={{margin:"10px"}}>Got a custom pattern code? Enter it here:</label>
              <input type="text" id="custom-code" name="custom-code"></input>
             <button style={{margin:"10px"}}>Submit</button>
          </form>
-        </Grid>      
+        </Grid>
     </Grid>
-        
+
 
     </div>
   );
