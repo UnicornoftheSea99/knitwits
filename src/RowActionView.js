@@ -29,25 +29,21 @@ const useStyles = makeStyles((theme) => ({
 class RowActionView extends Component {
     static contextType = SmallContext;
     state = {
-        instructions: [],
-        currentTicker:0
+        instructions: []
       }
-    updateParentCount(newCount) {
-      this.setState({currentTicker: newCount})
-    }
     componentDidMount (){
         let context = this.context;
         var query = context.query;
         console.log(query);
-       var query_code = query.split("/").pop();
+        var queryVal = query.split("/").pop();
 
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
-          var enterVal = data[query_code]
-          enterVal = JSON.parse(enterVal.replaceAll("\\\\", "\\").replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},').replaceAll('"rows":1},,', '"rows":1},').replaceAll('"rows":1},}', '"rows":1}}'))
-          this.setState({instructions:enterVal})
-          console.log(enterVal)
+          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
+                      .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
+                      .replaceAll('"rows":1},,', '"rows":1},')
+                      .replaceAll('"rows":1},}', '"rows":1}}'))})
         }
       )
     }
@@ -74,10 +70,9 @@ class RowActionView extends Component {
                 </FormControl>
              </div>
               <Counter />
-              <p>Current instructions are {this.state.instructions[1]}</p>
-
             </Grid>
             <Grid item xs={6}>
+
              {
                JSON.stringify(this.state.instructions)
                // Object.keys(this.state.instructions).map(item =>
@@ -153,7 +148,5 @@ class Counter extends Component {
       )
     }
   }
-
-
 
 export default RowActionView;
