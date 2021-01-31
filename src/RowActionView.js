@@ -20,11 +20,6 @@ class RowActionView extends Component {
     state = {
       instructions: []
     }
-    // setCharAt(str,index,chr) {
-    //   if(index > str.length-1) return str;
-    //   return str.substring(0,index) + chr + str.substring(index+1);
-    // }
-
     componentDidMount (){
       var query = '';
       switch(MyContext.chosenPattern){
@@ -41,7 +36,6 @@ class RowActionView extends Component {
           console.log("no query")
           query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
       }
-<<<<<<< HEAD
       var queryVal;
       queryVal = query.split("/").pop()
 
@@ -54,39 +48,6 @@ class RowActionView extends Component {
                       .replaceAll('"rows":1},}', '"rows":1}}'))})
         }
       )
-=======
-
-      var query_code = query.split("/").pop();
-      var xhr = new XMLHttpRequest();
-      var json_obj, status = false;
-      xhr.open("GET", query, true);
-      xhr.onload = function (e) {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              var json_obj = JSON.parse(xhr.responseText);
-              var pattern = json_obj[query_code];
-              console.log(pattern);
-              var same = '';              
-              for (const n in pattern){
-                // console.log(n["part"]);
-                if (pattern[n]["part"] !== same){
-                    partArr.push(n["part"]);
-                    same = n["part"];
-                }
-              }
-              console.log(partArr);
-              status = true;
-            } else {
-              console.error(xhr.statusText);
-            }
-          }
-        }.bind(this);
-        xhr.onerror = function (e) {
-          console.error(xhr.statusText);
-        };
-        xhr.send(null);
-
->>>>>>> 33653d47c0adecb29ed07c1bea11c63c04c940df
     }
     constructor(props) {
         super(props);
