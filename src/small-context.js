@@ -5,5 +5,6 @@ export const SmallContext = React.createContext({
     patternPicked:false,
     decideScarf: () => {},
     decideBee: () => {},
-    decidePlushie: () => {}    
+    decidePlushie: () => {},
+    query: ''    
 });

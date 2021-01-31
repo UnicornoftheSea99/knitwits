@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 /* design intentionally sucks so when we improve ui it's universal */
-
 const images = [
     {
       url: './IMG_6903.jpg',
@@ -104,8 +103,6 @@ const images = [
       transition: theme.transitions.create('opacity'),
     },
   }));
-  
-
 
 export default function PatternSelectScreen(){
     const myContext=useContext(SmallContext);

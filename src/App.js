@@ -15,25 +15,27 @@ class App extends Component {
     this.state={patternPicked: false, chosenPattern: '', // haha. beefault
     decideScarf: this.decideScarf.bind(this),
     decideBee: this.decideBee.bind(this),
-    decidePlushie: this.decidePlushie.bind(this)};
+    decidePlushie: this.decidePlushie.bind(this),
+    query:''};
   }
 
   decideScarf(){
-    this.setState({patternPicked: true, chosenPattern: 'scarf'});
+    this.setState({patternPicked: true, chosenPattern: 'scarf',
+    query:'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'});
     console.log("scarf!");
   }
 
   decideBee(){
-    this.setState({patternPicked: true, chosenPattern: 'bee'});
+    this.setState({patternPicked: true, chosenPattern: 'bee',
+    query:'https://knitwits.ue.r.appspot.com/api/get/-7378964869400283023'});
     console.log("bee!");
   }
 
   decidePlushie(){
-    this.setState({patternPicked: true, chosenPattern: 'plushie'});
+    this.setState({patternPicked: true, chosenPattern: 'plushie',
+    query:'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'});
     console.log("plushie!");
   }
-
-
 
   render(){
     const picked = this.state.patternPicked;

@@ -1,10 +1,8 @@
 import './App.css';
-import React, { createContext, Component } from 'react';
+import React, { createContext, useContext, Component } from 'react';
 import { SmallContext } from './small-context.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-const MyContext = React.createContext();
 
 /*async grabPattern = query => {
     let response = await fetch(query, {method: 'GET', redirect: 'follow'});
@@ -17,20 +15,12 @@ const MyContext = React.createContext();
 var partArr = [''];
 
 class RowActionView extends Component {
-
+    static contextType = SmallContext;   
     componentDidMount (){
-        var query = '';
-      switch(MyContext.chosenPattern){
-          case 'scarf':
-          query = 'https://knitwits.ue.r.appspot.com/api/get/-193436168588079716'
-          break;
-      case 'bee':
-          query = 'https://knitwits.ue.r.appspot.com/api/get/-7378964869400283023'
-          break;
-      case 'plushie':
-          query = 'https://knitwits.ue.r.appspot.com/api/get/-4778850897406943288'
-          break;
-      }
+        let context = this.context;
+        // const MmyContext = React.useContext(SmallContext);
+        var query = context.query;
+        console.log(query);
 
       var query_code = query.split("/").pop();
       var xhr = new XMLHttpRequest();
