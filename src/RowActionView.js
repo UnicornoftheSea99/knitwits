@@ -29,18 +29,23 @@ const useStyles = makeStyles((theme) => ({
 class RowActionView extends Component {
     static contextType = SmallContext;  
     state = {
-        instructions: []
+        instructions: [],
+        currentTicker:0
       }
+    updateParentCount(newCount) {
+      this.setState({currentTicker: newCount})
+    }
     componentDidMount (){
         let context = this.context;
         var query = context.query;
         console.log(query);
-        var queryVal = query.split("/").pop();
+       var query_code = query.split("/").pop();
 
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
-          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
+          console.log(data[query_code])
+          this.setState({instructions:JSON.parse(data[query_code].replaceAll("\\\\", "\\")
                       .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
                       .replaceAll('"rows":1},,', '"rows":1},')
                       .replaceAll('"rows":1},}', '"rows":1}}'))})
@@ -70,9 +75,10 @@ class RowActionView extends Component {
                 </FormControl>
              </div>
               <Counter />
+              <p>Current instructions are {this.state.instructions[1]}</p>
+
             </Grid>
             <Grid item xs={6}>
-             <TodoApp />
              {
                Object.keys(this.state.instructions).map(item =>
                 <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
@@ -147,67 +153,6 @@ class Counter extends Component {
     }
   }
 
-  class TodoApp extends Component {
-    constructor(props) {
-      super(props);
-      this.state = { items: [], text: '' };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    render() {
-      return (
-        <div>
-          <h3>Steps to Do</h3>
-          <TodoList items={this.state.items} />
-          <form onSubmit={this.handleSubmit}>
-
-            <label htmlFor="new-todo">
-              What needs to be done?
-            </label>
-            <input
-              id="new-todo"
-              onChange={this.handleChange}
-              value={this.state.text}
-            />
-            <button>
-              Add #{this.state.items.length + 1}
-            </button>
-          </form>
-        </div>
-      );
-    }
-
-    handleChange(e) {
-      this.setState({ text: e.target.value });
-    }
-
-    handleSubmit(e) {
-      e.preventDefault();
-      if (this.state.text.length === 0) {
-        return;
-      }
-      const newItem = {
-        text: this.state.text,
-        id: Date.now()
-      };
-      this.setState(state => ({
-        items: state.items.concat(newItem),
-        text: ''
-      }));
-    }
-  }
-
-  class TodoList extends Component {
-    render() {
-      return (
-        <ul>
-          {this.props.items.map(item => (
-            <li key={item.id}>{item.text}</li>
-          ))}
-        </ul>
-      );
-    }
-  }
+  
 
 export default RowActionView;

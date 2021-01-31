@@ -7,7 +7,6 @@ from pyrebase import pyrebase
 from flask import request
 from hidden import *
 from flask_cors import CORS
-import pdfkit
 import ast
 
 app = Flask(__name__,
@@ -61,7 +60,6 @@ def getPDF(hashVal):
         text = jsonPage[hashVal].replace("\\\\", "\\").replace("/", "of").replace('"rows":1}', '"rows":1},').replace('"rows":1},,', '"rows":1},').replace('"rows":1},}', '"rows":1}}')
         text = json.loads(text)
         x = render_template("patternpdf.html", text=text, hashVal = hashVal)
-        pdfkit.from_string(x, False)
         return x
 
     except Exception as ex:
