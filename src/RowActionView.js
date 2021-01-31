@@ -43,10 +43,14 @@ class RowActionView extends Component {
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
-          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
-                      .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
-                      .replaceAll('"rows":1},,', '"rows":1},')
-                      .replaceAll('"rows":1},}', '"rows":1}}'))})
+          if (data[queryVal]){
+            this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
+                        .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
+                        .replaceAll('"rows":1},,', '"rows":1},')
+                        .replaceAll('"rows":1},}', '"rows":1}}'))})
+          }else{
+            this.setState({instructions:{0:{part:"N/A", instructions:"This item does not exist in our database!",rows:"N/A"}}})
+          }
         }
       )
     }
