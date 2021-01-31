@@ -31,7 +31,10 @@ class RowActionView extends Component {
     state = {
         instructions: [],
         query:"",
-        current:0
+        current:0,
+        partTypes:[''],
+        rowMarks:[0], 
+        currentPart:''
       }
     componentDidMount (){
         let context = this.context;
@@ -59,20 +62,26 @@ class RowActionView extends Component {
     }
     constructor(props) {
         super(props);
-        this.updateCurrent = this.updateCurrent.bind(this)
+        this.updateCurrent = this.updateCurrent.bind(this);
+        this.saveProgress = this.saveProgress.bind(this);
       }
+
+    saveProgress(event){
+        this.setState({currentPart: event.target.value}); 
+    }
+
     render(){
         // this, instructions something else i need to peee
-        var types = [''];
-        var same = ''
-        console.log(this.state.instructions);
-        for (const key in this.state.instructions){
-            if (this.state.instructions[key].part !== same){
-                types.push(this.state.instructions[key].part);
-                same = this.state.instructions[key].part;
-                console.log(this.state.instructions[key].part);
+        var same = '';
+            for (const key in this.state.instructions){
+                if (this.state.instructions[key].part !== same){
+                    this.state.partTypes.push(this.state.instructions[key].part);
+                    this.state.rowMarks.push(key);
+                    same = this.state.instructions[key].part;
+                    console.log(this.state.instructions[key].part);
+                }
             }
-        }
+        
         return(<Grid container spacing={3}>
             <Grid item xs={12}>
             </Grid>
@@ -85,8 +94,10 @@ class RowActionView extends Component {
                                 labelId="partDropdownLabel"
                                 id="partDropdown"
                                 name="partDropdown"
+                                value={this.state.currentPart}
+                                onChange={this.saveProgress}
                             >
-                                {types.map(type => (<option value={type}>{type}</option>))}
+                                {this.state.partTypes.map(type => (<option value={type}>{type}</option>))}
                             </Select>
                 </FormControl>
              </div>
