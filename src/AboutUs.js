@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
@@ -12,8 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from "@material-ui/core/Container";
 
 
-  
-    
+
 class AboutUs extends Component{ 
   
   render() {
@@ -38,7 +34,6 @@ class AboutUs extends Component{
           >
             <CardMedia style={{ height: "300px" }} image={'emily.jpg'} />
             <CardContent>
-              {/* <Typography gutterBottom variant="h5" component="h3"> */}
               <Typography component="h3">
                 Emily
               </Typography>
@@ -65,7 +60,6 @@ class AboutUs extends Component{
           >
             <CardMedia style={{ height: "300px" }} image={'ananda.jpg'} />
             <CardContent>
-              {/* <Typography gutterBottom variant="h5" component="h3"> */}
               <Typography component="h3">
                 Ananda
               </Typography>
@@ -92,7 +86,6 @@ class AboutUs extends Component{
           >
             <CardMedia style={{ height: "300px"}} image={'sarah.PNG'} />
             <CardContent>
-              {/* <Typography gutterBottom variant="h5" component="h3"> */}
               <Typography component="h3">
                 Sarah
               </Typography>
@@ -109,9 +102,6 @@ class AboutUs extends Component{
           </Card>
             </Grid>
           </Grid>
-          
-          
-          
           </Container>
        </div>
 
