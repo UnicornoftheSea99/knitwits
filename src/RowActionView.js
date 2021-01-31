@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 //const formCtrl = useStyles().formControl;
 
 class RowActionView extends Component {
-    static contextType = SmallContext;  
+    static contextType = SmallContext;
     state = {
         instructions: []
       }
@@ -72,15 +72,17 @@ class RowActionView extends Component {
               <Counter />
             </Grid>
             <Grid item xs={6}>
-             
+
              {
-               Object.keys(this.state.instructions).map(item =>
-                <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
-               )
+               JSON.stringify(this.state.instructions)
+               // Object.keys(this.state.instructions).map(item =>
+               //  <p><b>{item}</b></p> //{this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+               // )
              }
 
             </Grid>
-          </Grid>);
+          </Grid>
+        );
     }
 }
 

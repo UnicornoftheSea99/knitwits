@@ -64,7 +64,7 @@ class AboutUs extends Component{
                 Ananda
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Computer Science and Statistical and Data Sciences
+                Computer Science and SDS Major
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                 Smith College '22
@@ -90,7 +90,7 @@ class AboutUs extends Component{
                 Sarah
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Computer Science and Classics
+                Computer Science and Classics Major
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                 Smith College '20
