@@ -23,7 +23,7 @@ class CustomPattern extends Component{
     console.log(this.state.instructions)
     var myForm = new FormData
     myForm.append("pattern", JSON.stringify(this.state.instructions));
-    const response = await fetch("https://knitwits.ue.r.appspot.com/api/post/", {
+    const response = await fetch("https://api-knitwits.ue.r.appspot.com/api/post/", {
       method: "POST",
       body: myForm
     });
