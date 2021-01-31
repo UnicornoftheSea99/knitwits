@@ -10,21 +10,21 @@ import Container from "@material-ui/core/Container";
 
 
 
-class AboutUs extends Component{ 
-  
+class AboutUs extends Component{
+
   render() {
-    
+
       return (
         <div>
            <Container>
           <h2>About Us</h2>
           <p>Our names are Emily, Sarah, and Ananda and we are the Low Key Influencers! We
-            made this project KnitWits as a nod to a hobby all three of us have leaned on during 
+            made this project KnitWits as a nod to a hobby all three of us have leaned on during
             quarantine, crocheting and knitting.
           </p>
           <Grid container>
             <Grid item xs={4}>
-            
+
              <Card
             style={{
               maxWidth: 345,
@@ -38,7 +38,7 @@ class AboutUs extends Component{
                 Emily
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Computer Science and French Major 
+                Computer Science and French Major
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                 Smith College '21
@@ -108,8 +108,8 @@ class AboutUs extends Component{
     );
   }
 }
-  
 
-  
-  
+
+
+
   export default AboutUs;
