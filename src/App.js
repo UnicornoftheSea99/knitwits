@@ -75,11 +75,7 @@ class App extends Component {
 // }
 
 // class Breadcrumb1 extends Component {
-<<<<<<< HEAD
-
-=======
 //   static contextType = SmallContext;
->>>>>>> cb7081ec27c45ef1101316ecd9057bdf5d3a5b07
 //   render() {
 //      let context = this.context;
 //   return (
