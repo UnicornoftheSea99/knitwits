@@ -72,7 +72,7 @@ class RowActionView extends Component {
               <Counter />
             </Grid>
             <Grid item xs={6}>
-             <TodoApp />
+             
              {
                Object.keys(this.state.instructions).map(item =>
                 <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
