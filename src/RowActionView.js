@@ -15,9 +15,11 @@ import Grid from '@material-ui/core/Grid';
 var partArr = [''];
 
 class RowActionView extends Component {
-    static contextType = SmallContext;   
+    static contextType = SmallContext;
     state = {
-        instructions: []
+        instructions: [],
+        query_code: "",
+        currentTicker:0
       }
     componentDidMount (){
         let context = this.context;
@@ -26,11 +28,12 @@ class RowActionView extends Component {
         console.log(query);
 
       var query_code = query.split("/").pop();
+      this.setState({query_code:query_code})
 
       fetch(query)
       .then(res => res.json())
       .then((data) =>{
-          this.setState({instructions:JSON.parse(data[queryVal].replaceAll("\\\\", "\\")
+          this.setState({instructions:JSON.parse(data[query_code].replaceAll("\\\\", "\\")
                       .replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},')
                       .replaceAll('"rows":1},,', '"rows":1},')
                       .replaceAll('"rows":1},}', '"rows":1}}'))})
@@ -47,6 +50,8 @@ class RowActionView extends Component {
             </Grid>
             <Grid item xs={6}>
               <Counter />
+              <p>Current instructions are {this.state.instructions["one"]}</p>
+
             </Grid>
             <Grid item xs={6}>
              <TodoApp />

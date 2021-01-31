@@ -12,8 +12,8 @@
 
   </head>
   <body>
-
-    <h1>Hash: {{hashVal}}</h1>
+    <h1>Knitwits Printwits</h1>
+    <h2>Hash: {{hashVal}}</h2>
     {% for instruction in text%}
     <p><b>{{instruction}}</b> part: {{text[instruction]['part']}} instructions: {{text[instruction]['instructions']}} rows: {{text[instruction]['rows']}}</p>
     {% endfor %}
