@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 //const formCtrl = useStyles().formControl;
 
 class RowActionView extends Component {
-    static contextType = SmallContext;  
+    static contextType = SmallContext;
     state = {
         instructions: [],
         currentTicker:0
@@ -45,8 +45,8 @@ class RowActionView extends Component {
       .then(res => res.json())
       .then((data) =>{
           var enterVal = data[query_code]
-          enterVal = enterVal.replaceAll("\\\\", "\\").replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},').replaceAll('"rows":1},,', '"rows":1},').replace(/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, "").replaceAll('"rows":1},}', '"rows":1}}'));
-
+          enterVal = JSON.parse(enterVal.replaceAll("\\\\", "\\").replaceAll("/", "of").replaceAll('"rows":1}', '"rows":1},').replaceAll('"rows":1},,', '"rows":1},').replaceAll('"rows":1},}', '"rows":1}}'))
+          this.setState({instructions:enterVal})
           console.log(enterVal)
         }
       )
@@ -79,13 +79,15 @@ class RowActionView extends Component {
             </Grid>
             <Grid item xs={6}>
              {
-               Object.keys(this.state.instructions).map(item =>
-                <p><b>{item}</b> {this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
-               )
+               JSON.stringify(this.state.instructions)
+               // Object.keys(this.state.instructions).map(item =>
+               //  <p><b>{item}</b></p> //{this.state.instructions[item]["part"]} {this.state.instructions[item]["instructions"]} {this.state.instructions[item]["rows"]}</p>
+               // )
              }
 
             </Grid>
-          </Grid>);
+          </Grid>
+        );
     }
 }
 
