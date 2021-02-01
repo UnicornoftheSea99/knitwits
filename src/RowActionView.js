@@ -62,11 +62,33 @@ class RowActionView extends Component {
         this.stateInit = this.stateInit.bind(this);
       }
 
+    getRows(){
+      var part =  this.state.currentPart;
+      var preIndex = this.state.partTypes.indexOf(this.state.currentPart);
+      if (part === ''){ preIndex = 1;}
+      console.log(preIndex);
+      console.log(this.state.rowMarks);
+      var newNum = this.state.rowMarks[preIndex];
+      console.log(newNum);
+      console.log(this.state.instructions[newNum]);
+      var rows = this.state.instructions[newNum].rows;
+      return rows;
+    }
+
     saveProgress(event){
+        var part =  this.state.currentPart;
+        var preIndex = this.state.partTypes.indexOf(this.state.currentPart);
+        if (part === ''){ preIndex = 1;}
+        console.log(preIndex);
+        var tempArr = []
+        tempArr.push(...this.state.rowMarks); // didn't copy the array nicely aaaaaaaaaaaaaa
+        tempArr[preIndex]=this.state.current.toString();
+        console.log([tempArr]);
+        this.setState({rowMarks:tempArr}); 
         this.setState({currentPart: event.target.value});
         console.log(event.target.value);
         var index = this.state.partTypes.indexOf(event.target.value);
-        console.log(this.state.partTypes);
+        console.log(this.state.rowMarks);
         console.log(index);
         var newNum = this.state.rowMarks[index];
         console.log(newNum);
@@ -110,7 +132,10 @@ class RowActionView extends Component {
                             </Select>
                 </FormControl>
              </div>
-              <Counter updateCurrent={this.updateCurrent}/>
+             <h3>{this.state.currentPart}</h3>
+              <Counter updateCurrent={this.updateCurrent} rowsLeft={
+                //((this.getRows()!== undefined)) ? this.getRows() : 
+                0}/>
               {
                 ((this.state.instructions[this.state.current]!== undefined) && this.state.current>=0) ? "Current Instruction: "+this.state.instructions[this.state.current].instructions : "Out of range"
               }
@@ -135,7 +160,9 @@ class Counter extends Component {
 
     constructor(props) {
       super(props);
-      this.state = { count: 0, left:''};
+      this.state = { count: 0, left: this.props.rowsLeft};
+      console.log("hello from counter!");
+      console.log(this.state.left);
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
