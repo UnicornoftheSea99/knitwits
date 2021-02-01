@@ -72,7 +72,7 @@ class App extends Component {
          <h1> KnitWits </h1>
         <Button
           startIcon={<Avatar src={'./IMG_0069.png'}
-          onClick={() => {this.setState({patternPicked: false});this.setState({patternPicked: false, curious: false, custom:false});}}
+          onClick={() => {this.setState({patternPicked: false, curious: false, custom:false});}}
           style={{ height: '115px', width: '130px' }}
           variant="square"></Avatar>}
           >
