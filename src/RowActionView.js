@@ -26,7 +26,7 @@ class RowActionView extends Component {
         query:"",
         current:0,
         partTypes:[''],
-        rowMarks:[0], 
+        rowMarks:[0],
         currentPart:''
       }
     componentDidMount (){
@@ -49,8 +49,8 @@ class RowActionView extends Component {
           }
         }
       )
-       var same =''; 
-      
+       var same ='';
+
     }
     updateCurrent(newNum){
       this.setState({current: newNum})
@@ -69,7 +69,7 @@ class RowActionView extends Component {
         console.log(this.state.partTypes);
         console.log(index);
         var newNum = this.state.rowMarks[index];
-        console.log(newNum); 
+        console.log(newNum);
         this.updateCurrent(newNum);
     }
 
